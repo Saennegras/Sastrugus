@@ -17,25 +17,21 @@ Főbb jellemzők:
 2. Architektúra
 2.1. Frontend
 
-    React vagy Vue.js - modern, komponens-alapú keretrendszer
+    NextJS - modern, szerver oldali komponens-alapú (by default) keretrendszer
     Responsive design - mobil és asztali eszközök optimalizálása
-    PWA (Progressive Web App) - offline működés lehetősége
 
 2.2. Backend
-    [???]
 
-    Node.js (Express) vagy Python (Django/Flask)
+    Strapi
     REST API - strukturált adatkommunikáció
     JWT token alapú hitelesítés
 
 2.3. Adatbázis
-    [???]
 
     PostgreSQL vagy MongoDB - a projekt struktúrájától függően
     File Storage - képek, PDF-ek (AWS S3 vagy hasonló)
 
 2.4. Hosting
-    [???]
 
     Cloud platform (AWS, Google Cloud, DigitalOcean)
     CI/CD pipeline - automatikus deploy
@@ -184,15 +180,15 @@ Step (Lépés)
 6.2. Technológiai stack választás
 Frontend:
 
-    React + TypeScript - típusbiztonság és nagy közösség
+    NextJS - típusbiztonság és nagy közösség
 
-    Tailwind CSS - gyors styling
+    SASS - gyors styling
 
     React Router - navigáció
 
 Backend:
 
-    Node.js + Express - JavaScript teljes stack
+    Strapi - JavaScript teljes stack
 
     PostgreSQL - relációs adatbázis
 
