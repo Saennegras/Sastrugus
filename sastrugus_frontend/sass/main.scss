@@ -1,1 +1,7 @@
-@import "base/base"
+// [IMPORTANT] The order of this sequence is crucial
+// EM: Failed to compile
+@import "base/mixins";
+@import "base/variables";
+@import "base/typography";
+@import "base/base";
+

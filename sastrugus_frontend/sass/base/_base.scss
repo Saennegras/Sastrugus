@@ -43,23 +43,26 @@ html {
   font-style: normal;
 }
 
-//html {
-//  font-size: 62.5%; // 1rem = 10px; 10px/16px = 62.5%
-//
-//  @include respond(tab-land) {
-//    // width < 900?
-//    font-size: 55%; // 1 rem = 9px, 9/16 = 56.25%
-//  }
-//
-//  @include respond(phone) {
-//    // width < 600?
-//    font-size: 50%; // 1 rem = 8px, 8/16 = 50%
-//  }
-//
-//  @include respond(big-desktop) {
-//    font-size: 75%; // 1 rem = 12px, 12/16 = 75%
-//  }
-//}
+//// for typography - dynamic metrics within the page
+//   attempt to make Sastrugus full responsive - find the different breakpoints
+//   adjust margins, paddings and font sizes
+html {
+  font-size: 62.5%; // 1rem = 10px; 10px/16px = 62.5%
+
+  @include respond(tab-land) {
+    // width < 900?
+    font-size: 55%; // 1 rem = 9px, 9/16 = 56.25%
+  }
+
+  @include respond(phone) {
+    // width < 600?
+    font-size: 50%; // 1 rem = 8px, 8/16 = 50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; // 1 rem = 12px, 12/16 = 75%
+  }
+}
 
 .bold {
   font-weight: bold;
