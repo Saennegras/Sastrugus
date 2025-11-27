@@ -1,0 +1,120 @@
+############################
+# OS / Editor
+############################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.Spotlight-V100
+.Trashes
+._*
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editors
+.idea
+nbproject
+
+############################
+# Node / Package managers
+############################
+
+node_modules
+
+# Yarn (Berry)
+.yarn/*
+!.yarn/cache
+!.yarn/unplugged
+!.yarn/patches
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Logs
+logs
+*.log
+yarn-error.log
+yarn-debug.log*
+npm-debug.log*
+
+############################
+# Build / Dist / Coverage
+############################
+
+dist
+build
+coverage
+
+# Strapi specific
+.strapi
+.strapi-updater.json
+.strapi-cloud.json
+exports
+
+# Next.js specific
+.next
+out
+.next-env.d.ts
+
+############################
+# Env / Secrets
+############################
+
+.env
+.env*.local
+*.pem
+
+############################
+# Misc binaries / archives
+############################
+
+*.7z
+*.csv
+*.dat
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.seed
+*.so
+*.swo
+*.swp
+*.swn
+*.swm
+*.out
+*.pid
+
+############################
+# Project specific
+############################
+
+public/uploads/*
+!public/uploads/.gitkeep
+ssl
+.eslintcache
+.tsbuildinfo
+pids
+results
+node_modules
+.node_history
+lcov.info
+lib-cov
+license.txt
