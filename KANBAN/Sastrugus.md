@@ -51,15 +51,15 @@ npm run dev
 **Start Date**: [YYYY-MM-DD]
 **Due Date**: [YYYY-MM-DD]
 
-### 📝 Description
+### Description
 [Detailed description of what needs to be done]
 
-### ✅ Acceptance Criteria
+### Acceptance Criteria
 - [ ] [Specific measurable criterion 1]
 - [ ] [Specific measurable criterion 2]
 - [ ] [Specific measurable criterion 3]
 
-### 🔧 Technical Details
+### Technical Details
 **Frontend Components**:
 - [Component names]
 
@@ -72,7 +72,7 @@ npm run dev
 **Dependencies**:
 - [Blocking tasks]
 
-### 📎 Resources
+### Resources
 - [Figma link]
 - [API documentation]
 - [Related PR]
@@ -84,18 +84,18 @@ npm run dev
 **Browser**: [Chrome/Firefox/Safari]
 **Priority**: [CRITICAL/HIGH/MEDIUM/LOW]
 
-### 🐛 Bug Description
+### Bug Description
 [What happens vs what should happen]
 
-### 🔄 Steps to Reproduce
+### Steps to Reproduce
 1. [Step 1]
 2. [Step 2]
 3. [Step 3]
 
-### 📸 Evidence
+### Evidence
 [Screenshots/GIFs/Logs]
 
-### 💡 Expected Behavior
+### Expected Behavior
 [What should happen instead]
 
 ---
@@ -141,15 +141,15 @@ npm run dev
 ### Napi update template:
 ## Standup - [Name] - [Date]
 
-### 🎯 Yesterday
+### Yesterday
 - [Task ID] - [Status]
 - [Task ID] - [Status]
 
-### 📋 Today  
+### Today  
 - [Task ID] - [Plan]
 - [Task ID] - [Plan]
 
-### 🚧 Blockers
+### Blockers
 - [Blocker description]
 - [Help needed from?]
 
@@ -158,19 +158,19 @@ npm run dev
 ### Sprint Záró Template:
 ## Sprint [Number] Review - [Date]
 
-### ✅ Completed
+### Completed
 - [Task ID] - [Brief description]
 - [Task ID] - [Brief description]
 
-### 🔄 Carry Over
+### Carry Over
 - [Task ID] - [Reason for carry over]
 
-### 📊 Metrics
+### Metrics
 - **Completed Story Points**: [X]/[Y]
 - **Burndown Rate**: [Z]%
 - **Blockers Resolved**: [Number]
 
-### 🎯 Next Sprint Focus
+### Next Sprint Focus
 - [Main focus area 1]
 - [Main focus area 2]
 
