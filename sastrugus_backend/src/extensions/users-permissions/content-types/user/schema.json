@@ -77,6 +77,12 @@
     "TokensAvailable": {
       "type": "integer",
       "default": 0
+    },
+    "workshops": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::workshop.workshop",
+      "mappedBy": "owner"
     }
   }
 }

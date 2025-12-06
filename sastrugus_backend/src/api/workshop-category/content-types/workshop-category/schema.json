@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workshop_categories",
+  "info": {
+    "singularName": "workshop-category",
+    "pluralName": "workshop-categories",
+    "displayName": "workshopCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "categoryName": {
+      "type": "string"
+    },
+    "categoryDescription": {
+      "type": "text"
+    },
+    "workshops": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::workshop.workshop",
+      "mappedBy": "workshop_category"
+    }
+  }
+}
