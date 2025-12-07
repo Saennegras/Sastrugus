@@ -1,0 +1,19 @@
+.header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4.8rem;
+
+    &__logo {
+        width: 5rem;
+    }
+
+    &__nav {
+        display: flex;
+        list-style: none;
+    }
+// adv css - nav has child item which are list items and everything exept the last-of-type should have margin-right;
+    & li:not(:last-of-type) {
+        margin-right: 4.6rem;
+    }
+}
