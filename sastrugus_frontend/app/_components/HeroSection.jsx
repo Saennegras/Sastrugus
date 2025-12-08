@@ -14,10 +14,10 @@ const HeroSection = ({ imgSrc,  headline, theme = "turquoise" }) => {
             </button>
             <img 
                 className={'hero__logo hero__logo--${theme}'} 
-                src="/assets/Star1.svg" 
+                src="/assets/star.svg" alt="" 
             />
         </section>
-    )
+    );
 };
 
-export default HeroSection
+export default HeroSection;
