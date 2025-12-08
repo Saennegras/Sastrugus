@@ -3,19 +3,19 @@ import Link from "next/link";
 const Header = () => {
     const navItems = [
         {
-            display: "WORKSHOP",
-            slug: "workshop"
+            display: "workshop",
+            slug: "workshop",
         },
         {
-            display: "ABOUT US",
-            slug: "aboutus"
-        }
+            display: "about us",
+            slug: "aboutus",
+        },
         //...
     ];
 
     return (
     <header className="header">
-        <img className="header__logon" src="/assets/logon.svg" alt=""/>
+        <img className="header__logo" src="/assets/logo.svg" alt="" />
         <ul className="header__nav"> 
             {navItems.map((item) => (
                 <li key={item.slug}> 
