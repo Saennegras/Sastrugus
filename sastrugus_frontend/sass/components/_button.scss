@@ -1,0 +1,28 @@
+ .btn {
+    font-size: 2.5rem;
+
+    &--small {
+        padding: 1rem 1.8rem;
+        border-radius: 30px;
+    }
+
+    &--medium {
+        padding: 1.6rem 3.2rem;
+        border-radius: 3.2rem;
+    }
+
+    &--black {
+        background-color: black;
+        color:goldenrod;
+    }
+
+    &--turquoise {
+        background-color: $turquoise;
+        color: white;
+    }
+
+    &--coral {
+        background-color: coral;
+        color: white;
+    }
+ }
