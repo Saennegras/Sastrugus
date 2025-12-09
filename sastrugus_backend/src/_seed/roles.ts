@@ -33,6 +33,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Workshop - read free only (policy enforced)
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
+    'api::workshop-category.workshop-category.find',
+    'api::workshop-category.workshop-category.findOne',
   ],
   authenticated: [
     // Auth
@@ -41,6 +43,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Workshop - read free only (policy enforced)
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
+    'api::workshop-category.workshop-category.find',
+    'api::workshop-category.workshop-category.findOne',
   ],
   editor: [
     // Auth
@@ -51,6 +55,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     'api::workshop.workshop.findOne',
     'api::workshop.workshop.create',
     'api::workshop.workshop.update',
+    'api::workshop-category.workshop-category.find',
+    'api::workshop-category.workshop-category.findOne',
   ],
   premium: [
     // Auth
@@ -59,6 +65,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Workshop - read all (no price filter)
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
+    'api::workshop-category.workshop-category.find',
+    'api::workshop-category.workshop-category.findOne',
   ],
 };
 

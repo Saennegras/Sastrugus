@@ -430,6 +430,83 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiWorkshopCategoryWorkshopCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'workshop_categories';
+  info: {
+    displayName: 'workshopCategory';
+    pluralName: 'workshop-categories';
+    singularName: 'workshop-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    categoryDescription: Schema.Attribute.Text;
+    categoryName: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::workshop-category.workshop-category'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    workshops: Schema.Attribute.Relation<'oneToMany', 'api::workshop.workshop'>;
+  };
+}
+
+export interface ApiWorkshopWorkshop extends Struct.CollectionTypeSchema {
+  collectionName: 'workshops';
+  info: {
+    displayName: 'Workshop';
+    pluralName: 'workshops';
+    singularName: 'workshop';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Decimal: Schema.Attribute.Integer;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    isPremium: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::workshop.workshop'
+    > &
+      Schema.Attribute.Private;
+    materialRequirement: Schema.Attribute.Text;
+    owner: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    steps: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+        minLength: 20;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    workshop_category: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::workshop-category.workshop-category'
+    >;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -932,6 +1009,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
+    workshops: Schema.Attribute.Relation<'oneToMany', 'api::workshop.workshop'>;
   };
 }
 
@@ -946,6 +1024,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::workshop-category.workshop-category': ApiWorkshopCategoryWorkshopCategory;
+      'api::workshop.workshop': ApiWorkshopWorkshop;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
