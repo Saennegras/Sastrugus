@@ -5,13 +5,13 @@ import InfoBlock from "./_components/InfoBlock";
 export default function Home() {
   const heroHeadline = (
     <>
-      <h1>Join the Sastrugus</h1>
-      <h1>Workshop Community</h1>
+      <h1>Csatlakozz a Sastrugus</h1>
+      <h1>Műhely közösségéhez</h1>
     </>
   );
   
   const infoBlockData  = {
-    headline: "the workshop",
+    headline: "A műhelyről",
     text: (
       <p className="copy">
         .........................

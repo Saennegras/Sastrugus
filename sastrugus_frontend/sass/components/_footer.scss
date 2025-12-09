@@ -34,9 +34,10 @@
     &__policies-nav {
         display: flex;
         list-style: none;
+        justify-content: space-between;
 
         & li:not(:last-of-type) {
-            margin-right: 3.5ram;
+            margin-right: 3.5rem;
         }
     }
 }
