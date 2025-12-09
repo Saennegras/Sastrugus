@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const HeroSection = ({ imgSrc,  headline, theme = "turquoise", categories = [] }) => {
+const HeroSection = ({ imgSrc,  headline, theme = "turquoise", categories = [], onCategoryClick }) => {
     const path = usePathname();
     return (
         <section className="hero">
@@ -13,23 +13,23 @@ const HeroSection = ({ imgSrc,  headline, theme = "turquoise", categories = [] }
                 {headline || <h3>Headline missing</h3>}
             </div>
 
+            {categories.length > 0 && (
+                <div className="hero__categories">
+                    {categories.map((cat) => (
+                        <button
+                            key={cat.slug}
+                            className={`hero__category-btn btn btn--small btn--${theme}`}
+                            onClick={() => onCategoryClick(cat.slug)}> 
+                                {cat.display}
+                        </button>
+                    ))}
+                </div>
+            )}
+
             {path !== "/workshop" && (
                 <button className={`btn btn--medium btn--${theme}`}>
                     <Link href="/login">Feliratkozás</Link>
                 </button>
-            )}
-
-            {categories.length > 0 && (
-                <div className="hero__categories">
-                    {categories.map((cat) => (
-                        <Link
-                        key={cat.slug}
-                        href={`/workshop/${cat.slug}`}
-                        className={`hero__category-btn btn btn--small btn--${theme}`}>
-                            {cat.display}
-                        </Link>
-                    ))}
-                </div>
             )}
 
             <img 
