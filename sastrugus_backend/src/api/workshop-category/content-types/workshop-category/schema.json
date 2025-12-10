@@ -22,6 +22,11 @@
       "relation": "oneToMany",
       "target": "api::workshop.workshop",
       "mappedBy": "workshop_category"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

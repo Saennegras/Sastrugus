@@ -7,16 +7,16 @@ import InfoBlock from "../_components/InfoBlock";
 export default function Home() {
 
     const heroHeadline = (
-    <>
-        <h1>Kategóriák</h1>
-    </>
+        <>
+            <h1>Műhely Kategóriák</h1>
+        </>
     );
 
     const workshopCategories = [
         { display: "Kerti barkács", slug: "garden_crafts" },
         { display: "Újrahasznosítás", slug: "refurbishing" },
         { display: "Iskolai műhely", slug: "handicraft" },
-        ];
+    ];
 
     const infoRefs = {};
     workshopCategories.forEach(cat => { 
@@ -36,11 +36,13 @@ export default function Home() {
         return {
             headline: cat.display,
             text: <p>Itt a {cat.display} leírása...</p>,
+
             button: (
-            <Link href={`/workshop/categories/${cat.slug}`} className="btn btn--small">
-                Tovább
-            </Link>
+                <Link href={`/workshop/categories/${cat.slug}`} className="btn btn--small">
+                    Tovább
+                </Link>
             ),
+
             image: imageSrc,
             reversed: idx === 1,
         };
@@ -48,18 +50,19 @@ export default function Home() {
 
     return (
         <main>
-                <HeroSection
-                    imgSrc="/assets/hero-workshop.png"
-                    headline={heroHeadline}
-                    theme="turqouise"
-                    categories={workshopCategories}
-                    onCategoryClick={handleScroll}
-                />
+            <HeroSection
+                imgSrc="/assets/hero-workshop.png"
+                headline={heroHeadline}
+                theme="turqouise"
+                categories={workshopCategories}
+                onCategoryClick={handleScroll}
+            />
 
-                {infoBlocksData.map((data, idx) => (
-                    <div
+            {infoBlocksData.map((data, idx) => (
+                <div
                     key={workshopCategories[idx].slug}
-                    ref={infoRefs[workshopCategories[idx].slug]}>
+                    ref={infoRefs[workshopCategories[idx].slug]}
+                >
                     <InfoBlock data={data} />
                 </div>
             ))}

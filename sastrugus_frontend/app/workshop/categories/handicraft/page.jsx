@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import InfoBlock from "../../../_components/InfoBlock";
 
-export default function GardenCraftsPage() {
+export default function HandicraftPage() {
     const [workshops, setWorkshops] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const slug = "garden_crafts";
+    const slug = "handicraft";
 
     useEffect(() => {
         async function fetchWorkshops() {
@@ -36,7 +36,7 @@ export default function GardenCraftsPage() {
 
     return (
         <main>
-            <h1>Kerti barkács</h1>
+            <h1>Iskolai műhely</h1>
 
             {workshops.map((workshop, idx) => {
                 const image = workshop.thumbnail?.url

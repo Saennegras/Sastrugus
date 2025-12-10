@@ -8,7 +8,7 @@ export default function Home() {
   const heroHeadline = (
     <>
       <h1>Csatlakozz a Sastrugus</h1>
-      <h1>Műhely közösségéhez</h1>
+      <h1>Műhely közösséghez</h1>
     </>
   );
   
