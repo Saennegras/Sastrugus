@@ -59,8 +59,11 @@ export default function Home() {
     //     infoRefs[cat.slug] = useRef(null);
     // });
 
-    const handleScroll = (slug) => {
-        infoRefs[slug].current?.scrollIntoView({ behavior: "smooth" });
+const handleScroll = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     };
 
     // const infoBlocksData = workshopCategories.map((cat, idx) => {
@@ -90,7 +93,7 @@ export default function Home() {
     console.log(data);
   
     return (
-        <main>
+        <main className="w-full flex-1 flex flex-col gap-12 md:gap-24 pb-24 overflow-x-hidden">
             <HeroSection
                 imgSrc="/assets/hero-workshop.png"
                 headline={heroHeadline}
@@ -98,7 +101,7 @@ export default function Home() {
                 categories={data}
                 onCategoryClick={handleScroll}
             />
-
+            <div className="flex flex-col gap-0">
             {data.map((dataItem, idx) => (
                 <div
                     key={dataItem.documentId}
@@ -107,6 +110,7 @@ export default function Home() {
                     <InfoBlock data={ {...dataItem, headLine: dataItem.categoryName, description: dataItem.categoryDescription, slug: `/workshop/categories/${dataItem.documentId}`, reversed: idx % 2 !== 0} } />
                 </div>
             ))}
+            </div>
         </main>
     );
 }
