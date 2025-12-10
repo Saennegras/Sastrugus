@@ -3,13 +3,12 @@ import { cookies } from 'next/headers';
 
 export async function GET() {
   const token = cookies().get('jwt')?.value;
-  
 
   if (!token) {
     return NextResponse.json({ user: null }, { status: 401 });
   }
 
-  const strapiRes = await fetch(`${process.env.STRAPI_URL}/api/users/me`, {
+  const strapiRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/me`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

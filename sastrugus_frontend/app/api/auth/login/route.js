@@ -3,20 +3,30 @@ import { cookies } from 'next/headers';
 
 export async function POST(request) {
   const { identifier, password } = await request.json();
-
-  try {
+  //try {
     // 1. Authenticate with Strapi
-    const strapiRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/local`, {
+    let strapiRes;
+    try {
+    strapiRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/local`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ identifier, password }),
     });
+    } catch(err) {
+      console.error("Error connecting to Strapi:", err);
+      return NextResponse.json(
+        { error: 'Nem sikerült csatlakozni az authentikációs szerverhez!' },
+        { status: 502 }
+      );
+    }
+
 
     const data = await strapiRes.json();
+    console.log("Strapi login response data:", data);
 
     if (!strapiRes.ok) {
       return NextResponse.json(
-        { error: data.error?.message || 'Login failed' },
+        { error: data.error?.message || 'Bejelentkezés sikertelen' },
         { status: strapiRes.status }
       );
     }
@@ -44,7 +54,7 @@ export async function POST(request) {
     // 4. Return user info (Do NOT return tokens in JSON)
     return NextResponse.json({ user: data.user });
 
-  } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
-  }
+  //} catch (error) {
+  //  return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  //}
 }

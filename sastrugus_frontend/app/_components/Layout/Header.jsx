@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from '../../../context/AuthContext';
 
 const Header = () => {
     const path = usePathname();
-    
+    const { user, loading, logout } = useAuth();
     // 1. Removed pipes from display text
     const navItems = [
         {
@@ -64,12 +65,21 @@ const Header = () => {
                 </nav>
 
                 {/* LOGIN BUTTON */}
-                <div className="flex-shrink-0">
+                { user ? (
+                    
+                        <button onClick={logout} className="bg-gray-100 text-gray-700 hover:bg-gray-200text-sm px-6 py-2.5 shadow-none hover:shadow-lg">
+                            Kijelentkezés
+                        </button>
+                    
+                ) : (
                     <Link href="/login">
                         <button className="btn-brand text-sm px-6 py-2.5 shadow-none hover:shadow-lg">
                             Bejelentkezés
                         </button>
                     </Link>
+                ) }
+                <div className="flex-shrink-0">
+
                 </div>
 
             </div>
