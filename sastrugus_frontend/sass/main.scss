@@ -5,6 +5,52 @@
 @import "base/typography";
 @import "base/base";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold tracking-tight mb-4;
+
+  }
+
+  h2 {
+    @apply text-3xl font-semibold tracking-tight mb-3;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold mb-2;
+  }
+
+  h4 {
+    @apply text-xl font-medium mb-2;
+  }
+
+  h5 {
+    @apply text-lg font-medium mb-1;
+  }
+
+  h6 {
+    @apply text-base font-medium;
+ 
+  }
+  
+
+  p {
+    @apply mb-4 leading-relaxed text-gray-600; 
+    .dark & {
+        @apply text-gray-300;
+    }
+  }
+}
+
+@layer components {
+  .btn-brand {
+    @apply bg-brand-600 text-white px-6 py-3 rounded-full font-bold transition-all hover:bg-brand-500 hover:shadow-lg;
+  }
+}
+
 @import "components/header";
 @import "components/button";
 @import "components/footer";
