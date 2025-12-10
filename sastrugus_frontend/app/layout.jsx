@@ -12,9 +12,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased text-canvas-900 bg-canvas-50 dark:bg-canvas-dark dark:text-gray-100">
+        |<AuthProvider>
         <Header/>
         {children}
         <Footer/>
+        </AuthProvider>
         </body>
     </html>
   )
