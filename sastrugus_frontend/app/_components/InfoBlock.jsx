@@ -8,7 +8,7 @@ const InfoBlock = ({data}) => {
             <img src={imagSrc || "/assets/default.png"} alt={headLine} className="info__image" />
             <div className="info__text">
                 <h2 className="info__headline">{headLine}</h2>
-                <p>{description}</p>
+                <div>{description}</div>
                 <Link href={slug} className="btn btn--small">
                     Tovább
                 </Link>
