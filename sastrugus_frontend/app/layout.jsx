@@ -1,6 +1,7 @@
 import "./../sass/main.scss"
 import Footer from "./_components/Layout/Footer"
 import Header from "./_components/Layout/Header"
+import { AuthProvider } from '../context/AuthContext';
 
 export const metadata = {
   title: "Create Next App",
@@ -11,9 +12,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header/>
-        {children}
-        <Footer/>
+        <AuthProvider>
+          <Header/>
+          {children}
+          <Footer/>
+        </AuthProvider>
         </body>
     </html>
   )
