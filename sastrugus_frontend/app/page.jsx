@@ -4,6 +4,7 @@ import HeroSection from "./_components/HeroSection";
 import InfoBlock from "./_components/InfoBlock";
 
 export default function Home() {
+
   const heroHeadline = (
     <>
       <h1>Csatlakozz a Sastrugus</h1>
