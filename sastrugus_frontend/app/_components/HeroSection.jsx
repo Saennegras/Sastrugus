@@ -17,10 +17,10 @@ const HeroSection = ({ imgSrc,  headline, theme = "turquoise", categories = [], 
                 <div className="hero__categories">
                     {categories.map((cat) => (
                         <button
-                            key={cat.slug}
+                            key={cat.documentId}
                             className={`hero__category-btn btn btn--small btn--${theme}`}
-                            onClick={() => onCategoryClick(cat.slug)}> 
-                                {cat.display}
+                            onClick={() => onCategoryClick(cat.documentId)}> 
+                                {cat.categoryName }
                         </button>
                     ))}
                 </div>

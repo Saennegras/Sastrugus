@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import InfoBlock from "../../../_components/InfoBlock";
+import InfoBlock from "../../_components/InfoBlock";
 
 export default function GardenCraftsPage() {
     const [workshops, setWorkshops] = useState([]);
