@@ -59,8 +59,11 @@ export default function Home() {
     //     infoRefs[cat.slug] = useRef(null);
     // });
 
-    const handleScroll = (slug) => {
-        infoRefs[slug].current?.scrollIntoView({ behavior: "smooth" });
+const handleScroll = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     };
 
     // const infoBlocksData = workshopCategories.map((cat, idx) => {
