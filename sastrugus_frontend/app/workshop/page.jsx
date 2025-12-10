@@ -26,15 +26,26 @@ export default function Home() {
     infoRefs[slug].current?.scrollIntoView({ behavior: "smooth" });
   };
 
-const infoBlocksData = workshopCategories.map(cat => ({
-  headline: cat.display,
-  text: <p>Itt a {cat.display} leírása...</p>,
-  button: (
-    <Link href={`/workshop/${cat.slug}`} className="btn btn--small">
-      Tovább
-    </Link>
-  ),
-}));
+  const infoBlocksData = workshopCategories.map((cat, idx) => {
+    let imageSrc = "/assets/default.png";
+  
+    // kategóriánként külön kép
+    if(cat.slug === "garden_crafts") imageSrc = "/assets/garden.png";
+    if(cat.slug === "refurbishing") imageSrc = "/assets/refurbishing.png";
+    if(cat.slug === "handicraft") imageSrc = "/assets/handicraft.png";
+  
+    return {
+      headline: cat.display,
+      text: <p>Itt a {cat.display} leírása...</p>,
+      button: (
+        <Link href={`/workshop/${cat.slug}`} className="btn btn--small">
+          Tovább
+        </Link>
+      ),
+      image: imageSrc,
+      reversed: idx === 1, //második elem reversed
+    };
+  });
 
   return (
     <main>
