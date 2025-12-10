@@ -19,7 +19,7 @@ export default function Home() {
         .........................
       </p>
     ),
-    button: <button className="btn btn--medium btn--turqouise"></button>,
+
     reversed: false,
   };
   return (
