@@ -4,7 +4,7 @@
 |--|--|
 |**Projekt neve**|Sastrugus online workshop  |
 |**Dátum**|2025/2026 tanév őszi félév  |
-|**Készítette**|Szabó István Keve (), Kovács Dániel (ADEJ1R)  |
+|**Készítette**|Szabó István Keve (ZR36BD), Kovács Dániel (ADEJ1R)  |
 |**Ötletgazda**|Szabó István Keve  |
 |**Projektgazda**|Kovács Dániel  |
 |**Backend**|Kovács Dániel  |
@@ -17,7 +17,9 @@
 
 Ez a dokumentum a Sastrugus online workshop / blueprint kezelő rendszer funkcionális működését írja le. Célja, hogy pontosan meghatározza, a rendszer milyen funkciókat biztosít, hogyan viselkedik a felhasználói interakciók során, és milyen adatokat kezel.
 
-//TODO1 Redszeráttekintés
+## Rendszeráttekintés
+
+A rendszer böngészőből elérhető, webes alkalmazás amely nyilvánosan használható. Egyaránt kínál funkcionalitást vendég látogatóknak, és regisztrált felhasználóknak. A vendég felhasználók csak nyilvános workshopokat tekinthetnek meg, míg a regisztrált felhasználók ezen felül feltölthetnek saját leírásokat, illetve megvásárolhatnak prémium wbrkshopokat is.
 
 ## Felhasználói felületek
 ### Bejelentkezési képernyő
@@ -43,7 +45,15 @@ Ez a dokumentum a Sastrugus online workshop / blueprint kezelő rendszer funkcio
    Az aktuális
    oldal (vagy oldalkategória) kiemelten látható
 
-//TODO2 Felhasználói felületek 
+### Főoldal
+
+Áttekintő képernyő, megjeleníti a legújabb három darab workshopot, hivatkozással a kategória oldalra és a workshopra
+
+**Műveletek:** 
+ 
+- A megjelenített workshopok mellett, a **kategória névre** kattintva az adott kategória jelenik meg 
+- A megjelenített workshopok mellett, a **Tovább** gombra kattintva a workshop jelenik meg 
+- A Hero szekcióban található **navigációs gomb** (Feliratkozás) a regisztrációs oldalra navigál
 
 ### Profil oldal
 Az oldalon a felhasználó megtekintheti a saját workshopjait, létrehozhat újakat és szerkesztheti a meglévőket. Törlésre addig van mód, amíg a workshop nem prémium vagy prémium és nincs egyetlen előfizetője sem.
@@ -69,8 +79,24 @@ Workshopok létrehozása és szerkesztése
 
 ## Funkcionális folyamatok
 
-//TODO3 Funkcionális folyamatok
+### Workshop létrehozása
 
+ 1. A felhasználó bejelentkezik 
+ 2. Szükség esetén a profil oldalra navigál
+ 3. Az oldalon megnyomja az új workshop beküldése gombot 
+ 4. Kitölti a mezőket Mentés gombra kattint 
+ 5. Szükség esetén javítja a hibákat és ismét a mentés gombra kattint 
+ 6. A rendszer a workshop mentést nyugtázza
+
+### Workshop szerkesztése
+
+ 1. A felhasználó bejelentkezik
+ 2. Szükség esetén a profil oldalra navigál
+ 3. Kiválasztja a workshopot, a szerkesztés gombra kattint
+ 4. Módosítja a kívánt mezőket
+ 5. Mentés gombra kattint
+ 6. Szükség esetén javítja a hibákat és ismét a mentés gombra kattint 
+ 7. A rendszer a workshop mentést nyugtázza
 
 ### Prémium workshop megvásárlása
 
@@ -114,11 +140,100 @@ Workshopok létrehozása és szerkesztése
 | **`workshops`** | `relation` | Műhelyek | Kapcsolat: egy a sokhoz (`oneToMany`) a `workshop` tartalomtípussal. |
 | **`slug`** | `string` | SEO Cím / Egyedi URL rész | Kötelező és egyedi. |
 
-//TODO 4 Adatmodell
+ ### User schema (alapértelmezett strapi schema kibővítve)
+| Mező neve| Mező típusa| Leírás| Követelmények / Megjegyzések |
+| :--- | :--- | :--- | :--- |
+| **`AboutMe`** | `RichText` | Bemutatkozás | - |
+| **`blocked`** | `Boolean` | Blokkolt | Alapértelmezett: `false` |
+| **`confirmationToken`** | `String` | Megerősítő token | Privát mező. |
+| **`confirmed`** | `Boolean` | Megerősítve | Alapértelmezett: `false` |
+| **`createdAt`** | `DateTime` | Létrehozás dátuma | - |
+| **`createdBy`** | `Relation` | Létrehozó | Privát, Kapcsolat: `oneToOne` (admin::user) |
+| **`email`** | `Email` | E-mail cím | Kötelező, Min. hossz: 6 |
+| **`FirstName`** | `String` | Keresztnév | Min. hossz: 5, Max. hossz: 50 |
+| **`locale`** | `String` | Nyelv / Hely | Privát mező. |
+| **`localizations`** | `Relation` | Lokalizációk | Privát mező. |
+| **`password`** | `Password` | Jelszó | Privát, Min. hossz: 6 |
+| **`provider`** | `String` | Hitelesítés szolgáltató | - |
+| **`publishedAt`** | `DateTime` | Publikálás dátuma | - |
+| **`resetPasswordToken`**| `String` | Jelszó-visszaállító token | Privát mező. |
+| **`role`** | `Relation` | Szerepkör | Kapcsolat: `manyToOne` (plugin::users-permissions.role) |
+| **`TokensAvailable`** | `Integer` | Elérhető tokenek | Alapértelmezett: `0` |
+| **`updatedAt`** | `DateTime` | Frissítés dátuma | - |
+| **`updatedBy`** | `Relation` | Frissítette | Privát, Kapcsolat: `oneToOne` (admin::user) |
+| **`username`** | `String` | Felhasználónév | Kötelező, Egyedi, Min. hossz: 3 |
+| **`workshops`** | `Relation` | Műhelyek | Kapcsolat: `oneToMany` (api::workshop.workshop) |
 
 ## Folyamatleírások
 
-//TODO 5 Folyamatleírások
+### Login
+
+```mermaid
+flowchart LR
+    A["Felhasználói oldal rendelése"] --> B{"Felhasználó bejelentkezett?"}
+    B -->|Igen| C["Átirányítás a dashboard oldalra"]
+    B -->|Nem| D["Login form megjelenítése"]
+    D --> E["Submit gomb megnyomása"]
+    E --> F["Login indítása a backend proxy felé"]
+    F --> G["Backend proxy meghívja a backendet"]
+    G --> H{"Sikeres bejelentkezés?"}
+    H -->|Igen| I["JWT és refresh token mentés"]
+    H -->|Nem| J["Hibaüzenet továbbadása frontendnek"]
+    I --> K["Frontend megkapja a bejelentkezési kísérlet eredményét"]
+    J --> K
+    K --> L{"Sikeres?"}
+    L -->|Igen| M["Átirányítás a dashboardra"]
+    L -->|Nem| N["Hibaüzenet megjelenítése"]
+    
+    classDef successClass fill:#90EE90,stroke:#2d6b2d,stroke-width:2px,color:#000
+    classDef errorClass fill:#FFB6C6,stroke:#8b0000,stroke-width:2px,color:#000
+    classDef processClass fill:#87CEEB,stroke:#4682b4,stroke-width:2px,color:#000
+    
+    class C,I,M successClass
+    class J,N errorClass
+    class D,E,F,G,K processClass
+
+```
+
+### Regisztráció	
+
+```mermaid
+flowchart LR
+    A["Regisztráció oldal renderelése"] --> B{"Felhasználó bejelentkezett?"}
+    B -->|Igen| C["Átirányítás a Dashboard oldalra"]
+    B -->|Nem| D["Regisztrációs form megjelenítése"]
+    D --> E["Submit gomb megnyomása"]
+    E --> F["Regisztráció indítása backend proxyn keresztül"]
+    F --> G["Backend validálja az adatokat"]
+    G --> H["Backend választ küld"]
+    H --> I{"Sikeres regisztráció?"}
+    I -->|Igen| J["Átirányítás a dashboard oldalra"]
+    I -->|Nem| K["Hibaüzenetek megjelenítése"]
+    
+    classDef successClass fill:#90EE90,stroke:#2d6b2d,stroke-width:2px,color:#000
+    classDef errorClass fill:#FFB6C6,stroke:#8b0000,stroke-width:2px,color:#000
+    classDef processClass fill:#87CEEB,stroke:#4682b4,stroke-width:2px,color:#000
+    
+    class C,J successClass
+    class K errorClass
+    class D,E,F,G,H processClass
+```
+
+### Logout	
+
+```mermaid
+flowchart LR
+    A["Kijelentkezés indítása"] --> B["Kijelentkezés proxy végpont hívása"]
+    B --> C["Proxy törli a JWT és a Refresh tokent"]
+    C --> D["Átirányítás a login oldalra"]
+    
+    classDef successClass fill:#90EE90,stroke:#2d6b2d,stroke-width:2px,color:#000
+    classDef errorClass fill:#FFB6C6,stroke:#8b0000,stroke-width:2px,color:#000
+    classDef processClass fill:#87CEEB,stroke:#4682b4,stroke-width:2px,color:#000
+    
+    class D successClass
+    class B,C processClass
+```
 
 ### Védett oldalak és tokenek kezelése	
 
@@ -200,8 +315,13 @@ flowchart LR
 
 ```
 
-//TODO 6 Rendszerkövetelmények
+## Rendszerkövetelmények
 
+Modern JavaScript képes böngésző
+Desktop vagy mobil eszköz a megjelenítéshez, Workshop létrehozáshoz javasolt a desktop
+Backend: Strapi + TypeScript
+Frontend: NextJS + JavaScript
+Deploy architektúra: Docker microservice-k (Frontend + Backend + DB (Postgres)), szükség esetén Nginx loadBalancer
 
 ## Elfogadási kritériumok
 - Backend futtatható, workshop, workshop category működik (API level)
@@ -210,7 +330,12 @@ flowchart LR
 - Prémium workshop esetén nem jogosult felhasználó a lépéseket, videót, és az anyaglistát nem kapja meg a lekérdezésben (API nem küldi vissza, nem elég ha az UI elrejti)
 - Nem prémium workshop nem vásárolható meg
 - Vendég felhasználó és csak regisztrált nem küldhet be új workshopot
-//TODO 7 elfogadási kritériumok
+- Frontend minden felbontáson jól jelenik meg
+- Kategória lista megjelenít minden kategóriát
+- Workshop lista csak a kategóriába tartozó blueprinteket jeleníti meg.
+- Pérmium workshop esetén ha a felhasználó nincs bejelentkezve, a tényleges tartalom helyén bejelentkezési hivatkozás jelenik meg.
+- Prémium workshop esetén ha a bejelentkezett felhasználó nem vásárolta még meg, vásárlás link jelenik meg.
+- Saját workshopot nem lehet megvenni
 
 ## Jövőbeni tervek
 - Értékelések a workshopokhoz
