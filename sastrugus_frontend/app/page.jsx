@@ -5,12 +5,7 @@ import InfoBlock from "./_components/InfoBlock";
 
 export default function Home() {
 
-  const heroHeadline = (
-    <>
-      <h1>Csatlakozz a Sastrugus</h1>
-      <h1>Műhely közösséghez</h1>
-    </>
-  );
+  const heroHeadline = "Csatlakozz a Sastrugus Műhely közösséghez";
   
   const infoBlockData  = {
     headline: "A műhelyről",

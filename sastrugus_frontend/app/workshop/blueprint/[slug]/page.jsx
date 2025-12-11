@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Title from "../../../_components/title";
+import Description from "../../../_components/description";
 import MaterialRequirement from "../../../_components/materialRequirement";
+import Steps from "../../../_components/steps";
 
 export default function Page({ params }) {
     const [workshops, setWorkshops] = useState([]);
     const [meta, setMeta] = useState([]);
     const [loading, setLoading] = useState(true);
-
 
     const slug = params.slug;
 
@@ -32,22 +34,10 @@ export default function Page({ params }) {
 
     return (
         <main>
-            <h1>{workshops.title}</h1>
-
-
+            <Title title={workshops.title} />
+            <Description description={workshops.description} />
             <MaterialRequirement materialRequirement={workshops.materialRequirement} />
-
-
-            <div
-                dangerouslySetInnerHTML={{
-                 __html: workshops.description,
-                }}
-            />
-            <div
-                dangerouslySetInnerHTML={{
-                 __html: workshops.steps,
-                }}
-            />
+            <Steps steps={workshops.steps} />
 
            
         </main>
