@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "purchases",
+  "info": {
+    "singularName": "purchase",
+    "pluralName": "purchases",
+    "displayName": "Purchase"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Workshop": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::workshop.workshop"
+    },
+    "User": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "success": {
+      "type": "boolean",
+      "required": true
+    },
+    "responseText": {
+      "type": "string",
+      "private": true,
+      "maxLength": 255,
+      "required": true
+    },
+    "payloadLog": {
+      "type": "json",
+      "private": true
+    }
+  }
+}

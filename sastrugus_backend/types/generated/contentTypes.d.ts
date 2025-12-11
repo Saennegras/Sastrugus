@@ -430,6 +430,46 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPurchasePurchase extends Struct.CollectionTypeSchema {
+  collectionName: 'purchases';
+  info: {
+    displayName: 'Purchase';
+    pluralName: 'purchases';
+    singularName: 'purchase';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::purchase.purchase'
+    > &
+      Schema.Attribute.Private;
+    payloadLog: Schema.Attribute.JSON & Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    responseText: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    success: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    User: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    Workshop: Schema.Attribute.Relation<'oneToOne', 'api::workshop.workshop'>;
+  };
+}
+
 export interface ApiWorkshopCategoryWorkshopCategory
   extends Struct.CollectionTypeSchema {
   collectionName: 'workshop_categories';
@@ -1026,6 +1066,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::purchase.purchase': ApiPurchasePurchase;
       'api::workshop-category.workshop-category': ApiWorkshopCategoryWorkshopCategory;
       'api::workshop.workshop': ApiWorkshopWorkshop;
       'plugin::content-releases.release': PluginContentReleasesRelease;
