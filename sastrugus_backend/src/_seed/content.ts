@@ -124,6 +124,7 @@ export async function seedContent(strapi: Core.Strapi) {
 
     const baseData = {
       categoryDescription: category.categoryDescription,
+      slug: category.slug || category.categoryName.toLowerCase().replace(/\s+/g, '-'), 
       locale: null,
       publishedAt: new Date(),
       createdBy: adminUser?.id,
@@ -183,6 +184,7 @@ export async function seedContent(strapi: Core.Strapi) {
 
     const data = {
       title: workshop.title,
+      slug: workshop.slug || workshop.title.toLowerCase().replace(/\s+/g, '-'),
       description: workshop.description,
       materialRequirement: workshop.materialRequirement,
       steps: workshop.steps,
