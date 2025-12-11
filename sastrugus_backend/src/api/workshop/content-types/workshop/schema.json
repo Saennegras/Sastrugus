@@ -49,6 +49,10 @@
     },
     "slug": {
       "type": "uid"
+    },
+    "video": {
+      "type": "string",
+      "regex": "^(?:https?:\\/\\/)?(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)([A-Za-z0-9_-]{11})$"
     }
   }
 }

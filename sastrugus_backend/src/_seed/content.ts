@@ -37,6 +37,7 @@ const WORKSHOPS = [
     isPremium: false,
     categoryName: 'Kerti barkács',
     ownerEmail: 'editor@example.com',
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
     title: 'Esővízgyűjtő hordó egyszerű állvánnyal',
@@ -51,6 +52,7 @@ const WORKSHOPS = [
     isPremium: true,
     categoryName: 'Kerti barkács',
     ownerEmail: 'premium@example.com',
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
     title: 'Palettából készült cipőtartó pad diákműhelyhez',
@@ -65,6 +67,7 @@ const WORKSHOPS = [
     isPremium: true,
     categoryName: 'Újrahasznosítás',
     ownerEmail: 'premium@example.com',
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
     title: 'Farönk újrahasznosított kávézóasztal görgőkkel',
@@ -79,6 +82,7 @@ const WORKSHOPS = [
     isPremium: false,
     categoryName: 'Újrahasznosítás',
     ownerEmail: 'editor@example.com',
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
     title: 'Mobil szerszámos kocsi az iskolai műhelybe',
@@ -93,6 +97,7 @@ const WORKSHOPS = [
     isPremium: false,
     categoryName: 'Iskolai műhely',
     ownerEmail: 'editor@example.com',
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
     title: 'Összecsukható forrasztóállomás doboz',
@@ -107,6 +112,7 @@ const WORKSHOPS = [
     isPremium: true,
     categoryName: 'Iskolai műhely',
     ownerEmail: 'premium@example.com',
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
 ];
 
@@ -202,6 +208,7 @@ export async function seedContent(strapi: Core.Strapi) {
       publishedAt: new Date(),
       createdBy: adminUser?.id,
       updatedBy: adminUser?.id,
+      video: workshop.video,
     };
 
     if (existing) {
