@@ -26,6 +26,7 @@ const WORKSHOP_CATEGORIES = [
 const WORKSHOPS = [
   {
     title: 'Kerti fűszerállvány építése kezdőknek',
+    slug: 'kerti-barkacs',
     description:
       '<p>Egy stabil, két szintes fűszerállványt készítünk, amit az iskola udvarán vagy otthon is fel lehet állítani. Rövid idő alatt látványos eredményt ad, ezért jó első barkácsprojekt.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a est sit amet justo vulputate viverra. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>',
     materialRequirement:
@@ -39,6 +40,7 @@ const WORKSHOPS = [
   },
   {
     title: 'Esővízgyűjtő hordó egyszerű állvánnyal',
+    slug: 'kerti-barkacs',
     description:
       '<p>Megmutatjuk, hogyan lehet stabil faállványt készíteni egy szabvány műanyag hordó alá, hogy könnyen lehessen kannába engedni az esővizet.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer luctus risus quis lacus convallis, at tempus leo dictum.</p>',
     materialRequirement:
@@ -52,6 +54,7 @@ const WORKSHOPS = [
   },
   {
     title: 'Palettából készült cipőtartó pad diákműhelyhez',
+    slug: 'ujrahasznositas',
     description:
       '<p>Egy használt EUR raklapból strapabíró cipőtartó padot építünk, amely jól mutat a bejáratnál és ülőfelületként is szolgál. A projekt megmutatja, hogyan lehet gyorsan értéket teremteni újrahasznosítással.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>',
     materialRequirement:
@@ -65,6 +68,7 @@ const WORKSHOPS = [
   },
   {
     title: 'Farönk újrahasznosított kávézóasztal görgőkkel',
+    slug: 'ujrahasznositas',
     description:
       '<p>Egy kidőlt fa törzséből kompakt kávézóasztalt készítünk, amit görgőkkel mozgatunk. Látványos példa arra, hogyan lesz hulladékból dizájn darab.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, velit non hendrerit aliquam, massa libero lacinia nunc, sed gravida magna nibh eget quam.</p>',
     materialRequirement:
@@ -78,6 +82,7 @@ const WORKSHOPS = [
   },
   {
     title: 'Mobil szerszámos kocsi az iskolai műhelybe',
+    slug: 'iskolai-muhely',
     description:
       '<p>Egy keskeny, görgős szerszámos kocsit építünk, ami elfér a padok között, és a diákok könnyen mozgathatják.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar, felis non sollicitudin aliquet, tellus libero aliquam eros, sed cursus urna mi at mauris.</p>',
     materialRequirement:
@@ -91,6 +96,7 @@ const WORKSHOPS = [
   },
   {
     title: 'Összecsukható forrasztóállomás doboz',
+    slug: 'iskolai-muhely',
     description:
       '<p>Készítünk egy hordozható, összecsukható dobozt, amelyben forrasztópáka, ón és apró alkatrészek is elférnek, így a diákok biztonságosan vihetik óráról órára.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel vestibulum augue, non ultrices arcu.</p>',
     materialRequirement:
