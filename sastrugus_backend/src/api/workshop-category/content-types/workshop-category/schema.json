@@ -24,9 +24,8 @@
       "mappedBy": "workshop_category"
     },
     "slug": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "uid",
+      "targetField": "categoryName"
     }
   }
 }

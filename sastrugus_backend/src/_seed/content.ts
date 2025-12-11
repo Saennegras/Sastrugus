@@ -5,16 +5,19 @@ const ADMIN_OWNER_EMAIL = 'superadmin@example.com';
 const WORKSHOP_CATEGORIES = [
   {
     categoryName: 'Kerti barkács',
+    slug: 'kerti-barkacs',
     categoryDescription:
       'Olyan kültéri ötletek, amelyeket egy délután alatt össze lehet állítani, akár iskolai műhelyben is. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod, nisl at convallis suscipit, metus nisl fermentum odio, vitae luctus quam magna ut enim.',
   },
   {
     categoryName: 'Újrahasznosítás',
+    slug: 'ujrahasznositas',
     categoryDescription:
       'Praktikus projektek, ahol régi tárgyak kapnak új életet és a diákok is megtanulják a fenntarthatóság alapjait. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis nisl ac nulla varius eleifend.',
   },
   {
     categoryName: 'Iskolai műhely',
+    slug: 'iskolai-muhely',
     categoryDescription:
       'Egyszerű, de látványos feladatok, amelyekkel a tanórán is lehet dolgozni. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris condimentum orci nec mattis congue.',
   },

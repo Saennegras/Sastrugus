@@ -454,9 +454,7 @@ export interface ApiWorkshopCategoryWorkshopCategory
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    slug: Schema.Attribute.UID<'categoryName'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -493,6 +491,7 @@ export interface ApiWorkshopWorkshop extends Struct.CollectionTypeSchema {
       'plugin::users-permissions.user'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID;
     steps: Schema.Attribute.Text & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
