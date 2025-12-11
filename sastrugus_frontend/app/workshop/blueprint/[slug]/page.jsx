@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from '/context/AuthContext';
+import {getLastPartofSlug} from '../../utils/getLastPartOfSlug';
 import Title from "../../../_components/title";
 import Description from "../../../_components/description";
 import MaterialRequirement from "../../../_components/materialRequirement";
@@ -14,6 +15,7 @@ export default function Page({ params }) {
     const [loading, setLoading] = useState(true);
 
     const slug = params.slug;
+    const documentId = getLastPartofSlug(slug);
 
     useEffect(() => {
         try {
