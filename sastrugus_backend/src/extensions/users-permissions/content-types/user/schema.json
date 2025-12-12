@@ -69,14 +69,32 @@
     "FirstName": {
       "type": "string",
       "minLength": 5,
-      "maxLength": 50
+      "maxLength": 50,
+      "required": true
+    },
+    "LastName": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 50,
+      "required": true
     },
     "AboutMe": {
-      "type": "richtext"
+      "type": "text"
     },
     "TokensAvailable": {
       "type": "integer",
       "default": 0
+    },
+    "workshops": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::workshop.workshop",
+      "mappedBy": "owner"
+    },
+    "purchases": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::purchase.purchase"
     }
   }
 }

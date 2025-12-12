@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workshops",
+  "info": {
+    "singularName": "workshop",
+    "pluralName": "workshops",
+    "displayName": "Workshop"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 200,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "materialRequirement": {
+      "type": "text"
+    },
+    "steps": {
+      "type": "text",
+      "required": true
+    },
+    "Decimal": {
+      "type": "integer"
+    },
+    "isPremium": {
+      "type": "boolean",
+      "required": true
+    },
+    "workshop_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::workshop-category.workshop-category",
+      "inversedBy": "workshops"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "workshops"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "video": {
+      "type": "string",
+      "regex": "^(?:https?:\\/\\/)?(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)([A-Za-z0-9_-]{11})$"
+    }
+  }
+}

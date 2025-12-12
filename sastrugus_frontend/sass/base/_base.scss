@@ -37,15 +37,18 @@ button {
   font-weight: 400;
 }
 
-html {
+/*html {
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-style: normal;
-}
+}*/
 
 //// for typography - dynamic metrics within the page
 //   attempt to make Sastrugus full responsive - find the different breakpoints
 //   adjust margins, paddings and font sizes
+
+/*
+
 html {
   font-size: 62.5%; // 1rem = 10px; 10px/16px = 62.5%
 
@@ -63,6 +66,7 @@ html {
     font-size: 75%; // 1 rem = 12px, 12/16 = 75%
   }
 }
+  */
 
 .bold {
   font-weight: bold;
