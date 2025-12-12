@@ -15,7 +15,7 @@ export default factories.createCoreController('api::workshop.workshop', ({ strap
       populate: ['workshop_category'],
     });
 
-    return { data: workshops };
+    return { data: pickLatestVersions(workshops) };
   },
 
   async mePurchased(ctx) {
@@ -37,6 +37,44 @@ export default factories.createCoreController('api::workshop.workshop', ({ strap
       .map(p => p.Workshop)
       .filter(Boolean);
 
-    return { data: workshops };
+    return { data: pickLatestVersions(workshops) };
   },
 }));
+
+/**
+ * Strapi v5 can leave both draft and published rows for the same documentId.
+ * If a published version exists, drop the remaining drafts; otherwise keep the newest draft.
+ * https://github.com/strapi/strapi/issues/23790
+ */
+function pickLatestVersions(workshops: any[]) {
+  const grouped = new Map<string, any[]>();
+
+  for (const workshop of workshops || []) {
+    const key = workshop.documentId || String(workshop.id);
+    const existing = grouped.get(key) || [];
+    existing.push(workshop);
+    grouped.set(key, existing);
+  }
+
+  const result: any[] = [];
+
+  grouped.forEach((items) => {
+    const published = items.find((w) => w.publishedAt);
+    if (published) {
+      result.push(published);
+      return;
+    }
+
+    const sorted = [...items].sort((a, b) => {
+      const dateA = new Date(a.updatedAt || a.createdAt || 0).getTime();
+      const dateB = new Date(b.updatedAt || b.createdAt || 0).getTime();
+      return dateB - dateA;
+    });
+
+    if (sorted[0]) {
+      result.push(sorted[0]);
+    }
+  });
+
+  return result;
+}

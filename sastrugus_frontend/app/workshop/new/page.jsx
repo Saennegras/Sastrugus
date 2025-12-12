@@ -132,7 +132,10 @@ export default function WorkshopFormPage() {
         },
       };
 
-      const url = isEdit ? `/api/proxy/workshops/${documentId}` : '/api/proxy/workshops';
+      let url = isEdit ? `/api/proxy/workshops/${documentId}` : '/api/proxy/workshops';
+      if(!formData.publishNow) {
+        url += '?status=draft';
+      }
       const method = isEdit ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -145,15 +148,6 @@ export default function WorkshopFormPage() {
 
       if (!res.ok) {
         throw new Error(data.error?.message || 'Hiba történt a mentés során');
-      }
-
-      // Publish if checkbox is checked
-      if (formData.publishNow) {
-        const workshopDocId = isEdit ? documentId : data.data?.documentId;
-        await fetch(`/api/proxy/workshops/${workshopDocId}/actions/publish`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        });
       }
 
       router.push('/dashboard');
