@@ -23,6 +23,10 @@ export default {
         if (user) {
             event.params.data.owner = user.id;
         }
+        const title = event.params?.data?.title;
+        if (title) {
+            event.params.data.slug = makeSlug(title);
+        }
     },
 
     async afterFindOne(event) {
@@ -98,4 +102,15 @@ const scrubFields = (entity: WorkshopData, fields: (keyof WorkshopData)[]) => {
             entity[field] = null;
         }
     });
+}
+
+function makeSlug(input: string): string {
+    return input
+        .toString()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 60) || 'blueprint';
 }
