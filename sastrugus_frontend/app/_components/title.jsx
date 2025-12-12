@@ -1,15 +1,14 @@
-const Title = ({title, reversed = false}) => {
+const Title = ({ title, reversed = false }) => {
+  const reversedClass = reversed ? "lg:order-first" : "";
 
-    const reversedClass = reversed ? " order-first lg:order-none" : "";
-    return ( // add the classname depending whether it is reversed or not
-        <div className="mt-20">
-            <h1 className="title"
-                dangerouslySetInnerHTML={{
-                 __html: title,
-                }}
-            ></h1>
-        </div>
-    );
+  return (
+    <div className={`mt-20 ${reversedClass}`}>
+      <div
+        className="text-4xl lg:text-5xl font-bold leading-tight text-gray-900"
+        dangerouslySetInnerHTML={{ __html: title }}
+      ></div>
+    </div>
+  );
 };
 
 export default Title;
