@@ -34,6 +34,8 @@ const AUTHENTICATED_PERMISSIONS = [
   'api::workshop.workshop.findOne',
   'api::workshop.workshop.create',
   'api::workshop.workshop.update',
+  'api::workshop.workshop.me',
+  'api::workshop.workshop.mePurchased',
   'api::workshop-category.workshop-category.find',
   'api::workshop-category.workshop-category.findOne',
   // Payment
