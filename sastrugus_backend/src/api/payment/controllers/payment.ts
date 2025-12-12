@@ -51,13 +51,14 @@ const workshop = await strapi.documents('api::workshop.workshop').findOne({
 
     const pendingPurchase = await strapi.documents('api::purchase.purchase').create({
       data: {
-        Workshop: workshop.documentId,
-        User: user.documentId,
+        Workshop: workshop.documentId, 
+        User: user.documentId, 
         success: false,
         responseText: 'PENDING_PAYMENT',
-        responsePayload: JSON.stringify({ stage: 'init_started' }),
+        payloadLog: { stage: 'init_started' },
       },
       status: 'published',
+      populate: ['Workshop', 'User'],
     });
 
     // call SimplePay to start transaction
@@ -131,18 +132,21 @@ const workshop = await strapi.documents('api::workshop.workshop').findOne({
       data: {
         success: isSuccess,
         responseText: isSuccess ? 'Sikeres fizetés' : `Sikertelen: ${eventStatus}`,
-        responsePayload: responseJsonString,
+        payloadLog: responseJsonString,
       }
     });
 
     // Redirect to frontend with result
     const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    const slug = (purchase.Workshop as any)?.slug || 'home';
+    const workshop = purchase.Workshop as any;
+    const slug = workshop?.slug 
+      ? `${workshop.slug}---${workshop.documentId}` 
+      : workshop?.documentId || 'home';
 
     if (isSuccess) {
-      return ctx.redirect(`${frontendUrl}/workshops/${slug}?payment=success`);
+      return ctx.redirect(`${frontendUrl}/workshop/blueprint/${slug}?payment=success`);
     } else {
-      return ctx.redirect(`${frontendUrl}/workshops/${slug}?payment=failed&reason=${eventStatus}`);
+      return ctx.redirect(`${frontendUrl}/workshop/blueprint/${slug}?payment=failed&reason=${eventStatus}`);
     }
   }
 };
