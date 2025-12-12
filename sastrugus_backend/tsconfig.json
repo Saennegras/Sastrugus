@@ -13,6 +13,7 @@
     "noEmitOnError": true,
     "noImplicitThis": true,
     "outDir": "dist",
+    "sourceMap": true,
     "rootDir": "."
   },
   "include": [
