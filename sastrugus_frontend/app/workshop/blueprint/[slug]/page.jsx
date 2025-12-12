@@ -19,7 +19,7 @@ export default function Page({ params }) {
 
   useEffect(() => {
     try {
-      fetch(`/api/proxy/workshops/${slug}?populate=*`)
+      fetch(`/api/proxy/workshops/${documentId}?populate=*`)
         .then((res) => res.json())
         .then((data) => {
           setWorkshop(data?.data || {});

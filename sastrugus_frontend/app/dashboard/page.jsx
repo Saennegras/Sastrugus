@@ -127,7 +127,7 @@ export default function DashboardPage() {
 
                   <div className="md:col-span-2 flex items-center justify-end gap-2">
                     <Link
-                      href={`/workshop/blueprint/${workshop.slug}`}
+                      href={`/workshop/blueprint/${workshop.slug ? `${workshop.slug}---${workshop.documentId}` : workshop.documentId}`}
                       className="p-2 text-canvas-900/50 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors"
                       title="Megtekintés"
                     >
