@@ -23,6 +23,24 @@ const ROLES = [
   },
 ];
 
+// Full permissions for authenticated users - roles not differentiated for now
+const AUTHENTICATED_PERMISSIONS = [
+  // Auth
+  'plugin::users-permissions.auth.changePassword',
+  'plugin::users-permissions.user.me',
+  'plugin::users-permissions.user.update',
+  // Workshop
+  'api::workshop.workshop.find',
+  'api::workshop.workshop.findOne',
+  'api::workshop.workshop.create',
+  'api::workshop.workshop.update',
+  'api::workshop-category.workshop-category.find',
+  'api::workshop-category.workshop-category.findOne',
+  // Payment
+  'api::payment.payment.init',
+  'api::payment.payment.callback',
+];
+
 const ROLE_PERMISSIONS: Record<string, string[]> = {
   public: [
     // Auth - login, register, password reset
@@ -30,7 +48,7 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     'plugin::users-permissions.auth.register',
     'plugin::users-permissions.auth.forgotPassword',
     'plugin::users-permissions.auth.resetPassword',
-    // Workshop - read free only (policy enforced)
+    // Workshop - read only
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
     'api::workshop-category.workshop-category.find',
@@ -38,48 +56,9 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Payment
     'api::payment.payment.callback',
   ],
-  authenticated: [
-    // Auth
-    'plugin::users-permissions.auth.changePassword',
-    'plugin::users-permissions.user.me',
-    'plugin::users-permissions.user.update',
-    // Workshop - read free only (policy enforced)
-    'api::workshop.workshop.find',
-    'api::workshop.workshop.findOne',
-    'api::workshop-category.workshop-category.find',
-    'api::workshop-category.workshop-category.findOne',
-    'api::payment.payment.init',
-    'api::payment.payment.callback',
-
-  ],
-  editor: [
-    // Auth
-    'plugin::users-permissions.auth.changePassword',
-    'plugin::users-permissions.user.me',
-    'plugin::users-permissions.user.update',
-    // Workshop - CRUD with restrictions (policies enforced)
-    'api::workshop.workshop.find',
-    'api::workshop.workshop.findOne',
-    'api::workshop.workshop.create',
-    'api::workshop.workshop.update',
-    'api::workshop-category.workshop-category.find',
-    'api::workshop-category.workshop-category.findOne',
-    'api::payment.payment.init',
-    'api::payment.payment.callback',
-  ],
-  premium: [
-    // Auth
-    'plugin::users-permissions.auth.changePassword',
-    'plugin::users-permissions.user.me',
-    'plugin::users-permissions.user.update',
-    // Workshop - read all (no price filter)
-    'api::workshop.workshop.find',
-    'api::workshop.workshop.findOne',
-    'api::workshop-category.workshop-category.find',
-    'api::workshop-category.workshop-category.findOne',
-    'api::payment.payment.init',
-    'api::payment.payment.callback',
-  ],
+  authenticated: AUTHENTICATED_PERMISSIONS,
+  editor: AUTHENTICATED_PERMISSIONS,
+  premium: AUTHENTICATED_PERMISSIONS,
 };
 
 export async function seedRoles(strapi: Core.Strapi) {
