@@ -5,7 +5,7 @@ import { useAuth } from '../../../context/AuthContext';
 
 const Header = () => {
     const path = usePathname();
-    const { user, loading, logout } = useAuth();
+    const { user, logout } = useAuth();
     // 1. Removed pipes from display text
     const navItems = [
         {
@@ -18,6 +18,13 @@ const Header = () => {
         },
         // Add other items here...
     ];
+
+    if(user) {
+        navItems.push({
+            display: "Profilom",
+            slug: "dashboard",
+        });
+    }
 
     // const filteredNavItems = path === "/workshop" 
     //     ? navItems.filter(item => !["workshop","aboutus"].includes(item.slug)) 
