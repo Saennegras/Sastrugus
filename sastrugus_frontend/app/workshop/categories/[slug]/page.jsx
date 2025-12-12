@@ -37,7 +37,7 @@ export default function Page({ params }) {
         // fetchWorkshops();
 
         try {
-            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/workshop-categories/${documentID}?populate[workshops][fields][0]=title&populate[workshops][fields][1]=description&populate[workshops][fields][2]=publishedAt`)
+            fetch(`/api/proxy/workshop-categories/${documentID}?populate[workshops][fields][0]=title&populate[workshops][fields][1]=description&populate[workshops][fields][2]=publishedAt`)
                 .then((res) => res.json())
                 .then((data) => {
                     setWorkshops(data.data)

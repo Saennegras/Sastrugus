@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     try {
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/workshop-categories`)
+      fetch(`/api/proxy/workshop-categories`)
         .then((res) => res.json())
         .then((data) => {
           data.data = data.data.map(dataItem => ({ 

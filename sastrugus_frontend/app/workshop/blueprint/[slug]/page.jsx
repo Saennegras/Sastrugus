@@ -20,7 +20,7 @@ export default function Page({ params }) {
 
     useEffect(() => {
         try {
-            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/workshops/${slug}?populate=*`)
+            fetch(`/api/proxy/workshops/${slug}?populate=*`)
                 .then((res) => res.json())
                 .then((data) => {
                     setWorkshops(data.data);
