@@ -60,7 +60,7 @@ export default function WorkshopFormPage() {
             steps: w.steps || '',
             Decimal: w.Decimal || '',
             isPremium: w.isPremium || false,
-            workshop_category: w.workshop_category?.id || '',
+            workshop_category: w.workshop_category?.id ? String(w.workshop_category.id) : '',
             video: w.video || '',
             publishNow: !!w.publishedAt,
           });
@@ -232,7 +232,7 @@ export default function WorkshopFormPage() {
           >
             <option value="">Kategória *</option>
             {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
+              <option key={cat.id} value={String(cat.id)}>
                 {cat.categoryName}
               </option>
             ))}
