@@ -7,6 +7,7 @@ import Title from "../../../_components/title";
 import Description from "../../../_components/description";
 import MaterialRequirement from "../../../_components/materialRequirement";
 import Steps from "../../../_components/steps";
+import Video from "@/app/_components/video";
 
 export default function Page({ params }) {
     const { user } = useAuth();
@@ -55,6 +56,7 @@ export default function Page({ params }) {
             ) : (
                 <Steps steps={workshops.steps} />
             )}
+            <Video video={workshops.video}/>
         </main>
     );
 }
