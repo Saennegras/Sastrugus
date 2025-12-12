@@ -1007,7 +1007,7 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    AboutMe: Schema.Attribute.RichText;
+    AboutMe: Schema.Attribute.Text;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1020,6 +1020,13 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     FirstName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+        minLength: 5;
+      }>;
+    LastName: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 50;
         minLength: 5;
@@ -1037,6 +1044,7 @@ export interface PluginUsersPermissionsUser
       }>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    purchases: Schema.Attribute.Relation<'oneToMany', 'api::purchase.purchase'>;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
