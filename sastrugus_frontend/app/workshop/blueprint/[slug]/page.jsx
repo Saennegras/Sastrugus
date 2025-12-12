@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useAuth } from "/context/AuthContext";
 import { getLastPartofSlug } from "../../utils/getLastPartOfSlug";
 import MaterialRequirement from "../../../_components/materialRequirement";
@@ -11,11 +12,22 @@ import PremiumLockNotice from "@/app/workshop/components/PremiumLockNotice";
 
 export default function Page({ params }) {
   const { user } = useAuth();
+  const searchParams = useSearchParams();
   const [workshop, setWorkshop] = useState({});
   const [loading, setLoading] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState(null);
 
   const slug = params.slug;
   const documentId = getLastPartofSlug(slug);
+
+  // Read payment param once and remove from URL
+  useEffect(() => {
+    const status = searchParams?.get('payment');
+    if (status) {
+      setPaymentStatus(status);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     try {
@@ -57,6 +69,17 @@ export default function Page({ params }) {
       </PageHeader>
 
       <div className="max-w-6xl mx-auto px-4 py-10">
+        {isPremium && paymentStatus === 'success' && (
+          <div className="mb-6 p-4 rounded-lg bg-pastel-mint text-pastel-mintText">
+            Sikeres fizetés! Most már hozzáférsz a teljes tartalomhoz.
+          </div>
+        )}
+        {isPremium && paymentStatus === 'failed' && (
+          <div className="mb-6 p-4 rounded-lg bg-red-100 text-red-700">
+            A fizetés sikertelen volt. Keresd az ügyfélszolgálatot!
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           <div className="lg:col-span-8 space-y-6">
             {isPremiumLocked ? (
