@@ -69,7 +69,7 @@ export default function DashboardPage() {
       <main className="max-w-6xl mx-auto px-4 py-12">
         <SectionHeader title="Blueprintjeim">
           <Link
-            href="/dashboard/new"
+            href="/workshop/new"
             className="inline-flex items-center gap-2 bg-brand-600 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-brand-700 transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
@@ -88,7 +88,7 @@ export default function DashboardPage() {
             <h2 className="text-xl font-semibold text-canvas-900 mb-2">Még nincs blueprinted</h2>
             <p className="text-canvas-900/60 mb-6">Készítsd el az első blueprintedet és oszd meg másokkal!</p>
             <Link
-              href="/dashboard/new"
+              href="/workshop/new"
               className="inline-flex items-center gap-2 bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-700 transition-colors"
             >
               Új blueprint létrehozása
@@ -96,7 +96,7 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-soft overflow-hidden">
-            {/* Desktop header */}
+  
             <div className="hidden md:grid md:grid-cols-12 gap-4 px-6 py-4 bg-canvas-100 border-b border-canvas-200 text-sm font-semibold text-canvas-900/70">
               <div className="col-span-5">Cím</div>
               <div className="col-span-3">Kategória</div>
@@ -104,14 +104,12 @@ export default function DashboardPage() {
               <div className="col-span-2 text-right">Műveletek</div>
             </div>
 
-            {/* Workshop list */}
             <div className="divide-y divide-canvas-200">
               {workshops.map((workshop) => (
                 <div
                   key={workshop.documentId}
                   className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 px-6 py-4 hover:bg-canvas-50 transition-colors"
                 >
-                  {/* Title */}
                   <div className="md:col-span-5">
                     <span className="font-semibold text-canvas-900 truncate block">{workshop.title}</span>
                     <p className="text-sm text-canvas-900/50 md:hidden mt-1">
@@ -119,17 +117,14 @@ export default function DashboardPage() {
                     </p>
                   </div>
 
-                  {/* Category - hidden on mobile */}
                   <div className="hidden md:flex md:col-span-3 items-center text-canvas-900/70">
                     {workshop.workshop_category?.categoryName || 'Nincs kategória'}
                   </div>
 
-                  {/* Status */}
                   <div className="md:col-span-2 flex items-center">
                     {getStatusBadge(workshop)}
                   </div>
 
-                  {/* Actions */}
                   <div className="md:col-span-2 flex items-center justify-end gap-2">
                     <Link
                       href={`/workshop/blueprint/${workshop.slug}`}
@@ -142,7 +137,7 @@ export default function DashboardPage() {
                       </svg>
                     </Link>
                     <Link
-                      href={`/dashboard/edit/${workshop.documentId}`}
+                      href={`/workshop/edit/${workshop.documentId}`}
                       className="p-2 text-canvas-900/50 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors"
                       title="Szerkesztés"
                     >
@@ -157,7 +152,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Purchased section */}
         <div className="mt-12">
           <SectionHeader title="Megvásárolt prémium blueprintek" />
           {loadingPurchased ? (

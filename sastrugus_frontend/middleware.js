@@ -33,7 +33,7 @@ export async function middleware(request) {
   console.log('Middleware triggered for path:', path);
   
   //Temporary: List some pages that need protection
-  const isProtectedRoute = path.startsWith('/dashboard') || path.startsWith('/profile');
+  const isProtectedRoute = path.startsWith('/dashboard') || path.startsWith('/profile') || path.startsWith('/workshop/new');
   const isAuthRoute = path === '/login' || path === '/register';
   
   const accessToken = request.cookies.get('jwt')?.value;
