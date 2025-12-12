@@ -3,51 +3,77 @@ import Link from "next/link";
 const Footer = () => {
     const navItems = [
         {
-            display: "workshop",
+            display: "Műhely",
             slug: "/workshop",
         },
         {
-            display: "about us",
+            display: "Magunkról",
             slug: "/aboutus"
         }
     ];
 
     const policies = [
         {
-            display: "imprint",
+            display: "Impresszum",
             slug: "/imprint",
         },
         {
-            display: "terms & conditions",
+            display: "ÁSZF",
             slug: "/toc",
         },
         {
-            display: "data protection",
+            display: "Adatvédelem",
             slug: "/data-protection",
         },
     ];
-    
+
     return (
-        <footer className="footer">
-            <nav className="footer__nav">
-                <img className="footer__logo" src="/assets/logo.svg" alt="" />
-                <ul className="footer__links">
-                    {navItems.map((item) => (
-                        <li key={item.slug}>
-                            <Link href={item.slug}><h5>{item.display}</h5></Link>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            <div className="footer__policies">
-                <ul className="footer__policies-nav">
-                    {policies.map((policy) => (
-                        <li key={policy.slug}>
-                            <p className="copy">{policy.display}</p>
-                        </li>
-                    ))}
-                </ul>
-                <p className="copy">© Sastrugus - all rights reserved</p>
+        <footer className="bg-night-950 text-white py-16 px-6 md:px-12">
+            <div className="max-w-7xl mx-auto">
+                {/* Top section: Logo + Navigation */}
+                <nav className="flex flex-col md:flex-row justify-between items-center md:items-center gap-8 mb-10 md:pr-16">
+                    <Link href="/" className="block">
+                        <img
+                            className="w-40 md:w-52 brightness-0 invert"
+                            src="/assets/logo.svg"
+                            alt="Sastrugus"
+                        />
+                    </Link>
+                    <ul className="flex flex-wrap justify-center gap-8 md:gap-16">
+                        {navItems.map((item) => (
+                            <li key={item.slug}>
+                                <Link
+                                    href={item.slug}
+                                    className="text-white/80 hover:text-white font-semibold text-lg transition-colors duration-200"
+                                >
+                                    {item.display}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                {/* Divider */}
+                <div className="border-t border-white/10 mb-8" />
+
+                {/* Bottom section: Policies + Copyright */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <ul className="flex flex-wrap justify-center gap-6 md:gap-10">
+                        {policies.map((policy) => (
+                            <li key={policy.slug}>
+                                <Link
+                                    href={policy.slug}
+                                    className="text-white/50 hover:text-white/80 text-sm transition-colors duration-200"
+                                >
+                                    {policy.display}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="text-white/50 text-sm">
+                        © {new Date().getFullYear()} Sastrugus - Minden jog fenntartva
+                    </p>
+                </div>
             </div>
         </footer>
     );
