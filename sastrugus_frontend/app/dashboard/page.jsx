@@ -137,7 +137,7 @@ export default function DashboardPage() {
                       </svg>
                     </Link>
                     <Link
-                      href={`/workshop/edit/${workshop.documentId}`}
+                      href={`/workshop/edit/${workshop.documentId}${workshop.publishedAt ? '' : '?draft=true'}`}
                       className="p-2 text-canvas-900/50 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors"
                       title="Szerkesztés"
                     >

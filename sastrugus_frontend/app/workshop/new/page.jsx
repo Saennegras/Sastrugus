@@ -1,15 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PageHeader from '@/app/_components/PageHeader';
 
 export default function WorkshopFormPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const documentId = params?.documentId;
   const isEdit = !!documentId;
+  const loadDraft = searchParams?.get('draft') === 'true';
 
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
@@ -46,7 +48,8 @@ export default function WorkshopFormPage() {
     if (!isEdit) return;
     async function fetchWorkshop() {
       try {
-        const res = await fetch(`/api/proxy/workshops/${documentId}?populate=workshop_category`);
+        const qs = loadDraft ? '?populate=workshop_category&status=draft' : '?populate=workshop_category';
+        const res = await fetch(`/api/proxy/workshops/${documentId}${qs}`);
         if (res.ok) {
           const data = await res.json();
           const w = data.data;
