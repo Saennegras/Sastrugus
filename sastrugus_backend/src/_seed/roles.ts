@@ -35,6 +35,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     'api::workshop.workshop.findOne',
     'api::workshop-category.workshop-category.find',
     'api::workshop-category.workshop-category.findOne',
+    // Payment
+    'api::payment.payment.callback',
   ],
   authenticated: [
     // Auth
@@ -45,6 +47,9 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     'api::workshop.workshop.findOne',
     'api::workshop-category.workshop-category.find',
     'api::workshop-category.workshop-category.findOne',
+    'api::payment.payment.init',
+    'api::payment.payment.callback',
+
   ],
   editor: [
     // Auth
@@ -57,6 +62,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     'api::workshop.workshop.update',
     'api::workshop-category.workshop-category.find',
     'api::workshop-category.workshop-category.findOne',
+    'api::payment.payment.init',
+    'api::payment.payment.callback',
   ],
   premium: [
     // Auth
@@ -67,6 +74,8 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     'api::workshop.workshop.findOne',
     'api::workshop-category.workshop-category.find',
     'api::workshop-category.workshop-category.findOne',
+    'api::payment.payment.init',
+    'api::payment.payment.callback',
   ],
 };
 
