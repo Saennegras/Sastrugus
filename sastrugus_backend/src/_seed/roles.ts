@@ -42,6 +42,7 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Auth
     'plugin::users-permissions.auth.changePassword',
     'plugin::users-permissions.user.me',
+    'plugin::users-permissions.user.update',
     // Workshop - read free only (policy enforced)
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
@@ -55,6 +56,7 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Auth
     'plugin::users-permissions.auth.changePassword',
     'plugin::users-permissions.user.me',
+    'plugin::users-permissions.user.update',
     // Workshop - CRUD with restrictions (policies enforced)
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
@@ -69,6 +71,7 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
     // Auth
     'plugin::users-permissions.auth.changePassword',
     'plugin::users-permissions.user.me',
+    'plugin::users-permissions.user.update',
     // Workshop - read all (no price filter)
     'api::workshop.workshop.find',
     'api::workshop.workshop.findOne',
