@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const InfoBlock = ({ data }) => {
-  const { headLine, description, slug, reversed = false, imagSrc } = data;
+  const { headLine, description, slug, reversed = false, imagSrc, overline, badge } = data;
 
   return (
     <section className="py-16 md:py-24">
@@ -36,9 +36,18 @@ const InfoBlock = ({ data }) => {
         <div className="w-full md:w-1/2">
           <div className={`max-w-lg ${reversed ? "mr-auto" : "ml-auto"}`}>
             
-            <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 text-xs font-bold tracking-wider uppercase mb-5">
-               Tutorial
-            </span>
+            <div className="flex items-center gap-2 mb-4">
+              {overline && (
+                <span className="inline-block py-1 px-3 rounded-full bg-canvas-100 text-canvas-800 text-xs font-semibold tracking-wide">
+                  {overline}
+                </span>
+              )}
+              {badge && (
+                <span className="inline-block py-1 px-3 rounded-full bg-pastel-mint text-pastel-mintText text-xs font-semibold tracking-wide">
+                  {badge}
+                </span>
+              )}
+            </div>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
               {headLine}

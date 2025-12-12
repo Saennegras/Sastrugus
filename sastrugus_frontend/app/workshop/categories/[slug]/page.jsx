@@ -37,7 +37,7 @@ export default function Page({ params }) {
         // fetchWorkshops();
 
         try {
-            fetch(`/api/proxy/workshop-categories/${documentID}?populate[workshops][fields][0]=title&populate[workshops][fields][1]=description&populate[workshops][fields][2]=publishedAt`)
+            fetch(`/api/proxy/workshop-categories/${documentID}?populate[workshops][fields][0]=title&populate[workshops][fields][1]=description&populate[workshops][fields][2]=publishedAt&populate[workshops][fields][3]=isPremium`)
                 .then((res) => res.json())
                 .then((data) => {
                     setWorkshops(data.data)
@@ -74,6 +74,10 @@ export default function Page({ params }) {
                                     }}
                                 />
                             ),
+                            overline: workshop.publishedAt
+                                ? new Date(workshop.publishedAt).toLocaleDateString()
+                                : undefined,
+                            badge: workshop.isPremium ? "Prémium" : undefined,
                             image,
                             reversed: idx % 2 !== 0,
                             slug: `/workshop/blueprint/${workshop.documentId}`,
