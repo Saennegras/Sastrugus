@@ -11,11 +11,7 @@ export default function Home() {
     const infoRefs = useRef({});
     const [isLoading, setLoading] = useState(true)
 
-    const heroHeadline = (
-        <>
-            <h1>Műhely Kategóriák</h1>
-        </>
-    );
+    const heroHeadline = "Műhely - Fedezd fel kreatív workshopjainkat!";
 
     const imageSrcs = {
         "1": "/assets/garden.png",
@@ -28,18 +24,18 @@ export default function Home() {
       fetch(`/api/proxy/workshop-categories`)
         .then((res) => res.json())
         .then((data) => {
-          data.data = data.data.map(dataItem => ({ 
-              ...dataItem, 
+          const items = data?.data || [];
+          const mappedItems = items.map(dataItem => ({
+              ...dataItem,
               imagSrc: imageSrcs[dataItem.id.toString()],
               link: `/workshop/categories/${dataItem.slug}---${dataItem.documentId}`
           }));
-          setData(data.data)
-          setMeta(data.meta)
+          setData(mappedItems)
+          setMeta(data?.meta || {})
           setLoading(false)
 
-          data.data.forEach(cat => { 
+          mappedItems.forEach(cat => {
             infoRefs.current[cat.documentId] = 'x';
-              //infoRefsTemp[cat.documentId] = useRef(null);
           });
         })
     } catch(err) {
