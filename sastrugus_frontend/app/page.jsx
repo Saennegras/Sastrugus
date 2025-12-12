@@ -20,7 +20,6 @@ export default function Home() {
   return (
     <main>
       <HeroSection headline={heroHeadline}/>
-      <InfoBlock data={infoBlockData} />
     </main>
   )
 }
