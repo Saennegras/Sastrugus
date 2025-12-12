@@ -17,6 +17,14 @@ type WorkshopData = {
 
 
 export default {
+    beforeCreate(event) {
+        const ctx = strapi.requestContext.get();
+        const user = ctx?.state?.user;
+        if (user) {
+            event.params.data.owner = user.id;
+        }
+    },
+
     async afterFindOne(event) {
         const { result } = event;
         if (result) {
