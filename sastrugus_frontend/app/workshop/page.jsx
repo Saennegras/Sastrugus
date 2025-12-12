@@ -31,7 +31,7 @@ export default function Home() {
           data.data = data.data.map(dataItem => ({ 
               ...dataItem, 
               imagSrc: imageSrcs[dataItem.id.toString()],
-              link: `/workshop/categories/${dataItem.documentId}`
+              link: `/workshop/categories/${dataItem.slug}---${dataItem.documentId}`
           }));
           setData(data.data)
           setMeta(data.meta)
@@ -107,7 +107,7 @@ const handleScroll = (id) => {
                     key={dataItem.documentId}
                     id={dataItem.documentId}
                 >
-                    <InfoBlock data={ {...dataItem, headLine: dataItem.categoryName, description: dataItem.categoryDescription, slug: `/workshop/categories/${dataItem.documentId}`, reversed: idx % 2 !== 0} } />
+                    <InfoBlock data={ {...dataItem, headLine: dataItem.categoryName, description: dataItem.categoryDescription, slug: `/workshop/categories/${dataItem.slug}---${dataItem.documentId}`, reversed: idx % 2 !== 0} } />
                 </div>
             ))}
             </div>

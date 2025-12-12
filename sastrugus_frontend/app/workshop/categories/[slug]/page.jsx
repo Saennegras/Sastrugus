@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {getLastPartofSlug} from '../../utils/getLastPartOfSlug';
 import InfoBlock from "../../../_components/InfoBlock";
+console.log("getLastPartofSlug:", getLastPartofSlug);
 
 export default function Page({ params }) {
     const [workshops, setWorkshops] = useState([]);
@@ -10,6 +12,7 @@ export default function Page({ params }) {
 
 
     const slug = params.slug;
+    const documentID = getLastPartofSlug(slug);
 
     useEffect(() => {
         // async function fetchWorkshops() {
@@ -34,7 +37,7 @@ export default function Page({ params }) {
         // fetchWorkshops();
 
         try {
-            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/workshop-categories/${slug}?populate[workshops][fields][0]=title&populate[workshops][fields][1]=description&populate[workshops][fields][2]=publishedAt`)
+            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/workshop-categories/${documentID}?populate[workshops][fields][0]=title&populate[workshops][fields][1]=description&populate[workshops][fields][2]=publishedAt`)
                 .then((res) => res.json())
                 .then((data) => {
                     setWorkshops(data.data)

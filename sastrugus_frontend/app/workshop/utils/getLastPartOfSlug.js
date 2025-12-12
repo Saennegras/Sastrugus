@@ -1,0 +1,1 @@
+export const getLastPartofSlug =  (slug) => { const i = slug.lastIndexOf('---'); return i === -1 ? slug : slug.slice(i + 3); };
