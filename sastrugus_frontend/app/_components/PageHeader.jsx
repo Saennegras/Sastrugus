@@ -11,7 +11,7 @@ const PageHeader = ({ title, subtitle, children }) => {
             </h1>
             {subtitle && (
               <p
-                className="text-lg md:text-xl text-brand-200/80 max-w-2xl"
+                className="text-lg md:text-xl text-white tracking-tight"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
