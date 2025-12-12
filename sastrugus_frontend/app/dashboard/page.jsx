@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth, useAuthFetch } from '@/context/AuthContext';
 import PageHeader from '@/app/_components/PageHeader';
 import SectionHeader from '@/app/_components/SectionHeader';
 import Link from 'next/link';
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const authFetch = useAuthFetch();
   const [workshops, setWorkshops] = useState([]);
   const [purchased, setPurchased] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,7 @@ export default function DashboardPage() {
       if (!user?.id) return;
 
       try {
-        const res = await fetch('/api/proxy/workshops/me');
+        const res = await authFetch('/api/proxy/workshops/me');
         if (res.ok) {
           const data = await res.json();
           setWorkshops(data.data || []);
@@ -36,7 +37,7 @@ export default function DashboardPage() {
       if (!user?.id) return;
 
       try {
-        const res = await fetch('/api/proxy/workshops/me/purchased');
+        const res = await authFetch('/api/proxy/workshops/me/purchased');
         if (res.ok) {
           const data = await res.json();
           setPurchased(data.data || []);
@@ -50,7 +51,7 @@ export default function DashboardPage() {
 
     fetchMyWorkshops();
     fetchPurchased();
-  }, [user]);
+  }, [user, authFetch]);
 
   const getStatusBadge = (workshop) => {
     if (workshop.publishedAt) {

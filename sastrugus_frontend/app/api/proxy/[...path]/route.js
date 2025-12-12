@@ -59,12 +59,16 @@ async function proxyRequest(request, params) {
     const responseContentType = backendResponse.headers.get('content-type');
     let responseBody;
 
+    // Signal to frontend that auth is invalid
+    const authInvalid = backendResponse.status === 401 || backendResponse.status === 403;
+
     if (responseContentType?.includes('application/json')) {
       responseBody = await backendResponse.json();
       return NextResponse.json(responseBody, {
         status: backendResponse.status,
         headers: {
           'X-Proxied': 'true',
+          ...(authInvalid && { 'X-Auth-Invalid': 'true' }),
         }
       });
     } else {
@@ -74,6 +78,7 @@ async function proxyRequest(request, params) {
         headers: {
           'Content-Type': responseContentType || 'application/octet-stream',
           'X-Proxied': 'true',
+          ...(authInvalid && { 'X-Auth-Invalid': 'true' }),
         },
       });
     }

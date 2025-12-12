@@ -4,9 +4,12 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PageHeader from '@/app/_components/PageHeader';
+import RichTextEditor from '@/app/_components/RichTextEditor';
+import { useAuthFetch } from '@/context/AuthContext';
 
 export default function WorkshopFormPage() {
   const router = useRouter();
+  const authFetch = useAuthFetch();
   const params = useParams();
   const searchParams = useSearchParams();
   const documentId = params?.documentId;
@@ -32,7 +35,7 @@ export default function WorkshopFormPage() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch('/api/proxy/workshop-categories');
+        const res = await authFetch('/api/proxy/workshop-categories');
         if (res.ok) {
           const data = await res.json();
           setCategories(data.data || []);
@@ -42,14 +45,14 @@ export default function WorkshopFormPage() {
       }
     }
     fetchCategories();
-  }, []);
+  }, [authFetch]);
 
   useEffect(() => {
     if (!isEdit) return;
     async function fetchWorkshop() {
       try {
         const qs = loadDraft ? '?populate=workshop_category&status=draft' : '?populate=workshop_category';
-        const res = await fetch(`/api/proxy/workshops/${documentId}${qs}`);
+        const res = await authFetch(`/api/proxy/workshops/${documentId}${qs}`);
         if (res.ok) {
           const data = await res.json();
           const w = data.data;
@@ -72,7 +75,7 @@ export default function WorkshopFormPage() {
       }
     }
     fetchWorkshop();
-  }, [isEdit, documentId]);
+  }, [isEdit, documentId, authFetch, loadDraft]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -99,11 +102,16 @@ export default function WorkshopFormPage() {
       setError('A cím 20-200 karakter között legyen!');
       return;
     }
-    if (!formData.description.trim()) {
+    const isEmptyHtml = (html) => {
+      if (!html) return true;
+      const stripped = html.replace(/<[^>]*>/g, '').trim();
+      return stripped.length === 0;
+    };
+    if (isEmptyHtml(formData.description)) {
       setError('A leírás megadása kötelező!');
       return;
     }
-    if (!formData.steps.trim()) {
+    if (isEmptyHtml(formData.steps)) {
       setError('A lépések megadása kötelező!');
       return;
     }
@@ -141,7 +149,7 @@ export default function WorkshopFormPage() {
       }
       const method = isEdit ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await authFetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -191,34 +199,29 @@ export default function WorkshopFormPage() {
         </div>
 
         <div>
-          <textarea
-            name="description"
-            placeholder="Leírás *"
-            className="border p-2 rounded text-black min-h-[100px] w-full"
+          <label className="block text-sm font-medium text-gray-700 mb-1">Leírás *</label>
+          <RichTextEditor
             value={formData.description}
-            onChange={handleChange}
-            required
+            onChange={(value) => setFormData({ ...formData, description: value })}
+            placeholder="Leírás *"
           />
         </div>
 
         <div>
-          <textarea
-            name="materialRequirement"
-            placeholder="Szükséges anyagok"
-            className="border p-2 rounded text-black min-h-[80px] w-full"
+          <label className="block text-sm font-medium text-gray-700 mb-1">Szükséges anyagok</label>
+          <RichTextEditor
             value={formData.materialRequirement}
-            onChange={handleChange}
+            onChange={(value) => setFormData({ ...formData, materialRequirement: value })}
+            placeholder="Szükséges anyagok"
           />
         </div>
 
         <div>
-          <textarea
-            name="steps"
-            placeholder="Lépések *"
-            className="border p-2 rounded text-black min-h-[120px] w-full"
+          <label className="block text-sm font-medium text-gray-700 mb-1">Lépések *</label>
+          <RichTextEditor
             value={formData.steps}
-            onChange={handleChange}
-            required
+            onChange={(value) => setFormData({ ...formData, steps: value })}
+            placeholder="Lépések *"
           />
         </div>
 

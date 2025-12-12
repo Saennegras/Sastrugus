@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useAuth } from "/context/AuthContext";
+import { useAuth, useAuthFetch } from "/context/AuthContext";
 import { getLastPartofSlug } from "../../utils/getLastPartOfSlug";
 import MaterialRequirement from "../../../_components/materialRequirement";
 import Steps from "../../../_components/steps";
@@ -12,6 +12,7 @@ import PremiumLockNotice from "@/app/workshop/components/PremiumLockNotice";
 
 export default function Page({ params }) {
   const { user } = useAuth();
+  const authFetch = useAuthFetch();
   const searchParams = useSearchParams();
   const [workshop, setWorkshop] = useState({});
   const [loading, setLoading] = useState(true);
@@ -30,21 +31,19 @@ export default function Page({ params }) {
   }, [searchParams]);
 
   useEffect(() => {
-    try {
-      fetch(`/api/proxy/workshops/${documentId}?populate=*`)
-        .then((res) => res.json())
-        .then((data) => {
-          setWorkshop(data?.data || {});
-        })
-        .catch((err) => {
-          console.error("Error loading workshop content:", err);
-        })
-        .finally(() => setLoading(false));
-    } catch (err) {
-      console.error("Error loading workshop content:", err);
-      setLoading(false);
+    async function fetchWorkshop() {
+      try {
+        const res = await authFetch(`/api/proxy/workshops/${documentId}?populate=*`);
+        const data = await res.json();
+        setWorkshop(data?.data || {});
+      } catch (err) {
+        console.error("Error loading workshop content:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [slug]);
+    fetchWorkshop();
+  }, [documentId, authFetch]);
 
   const isPremium = !!workshop?.isPremium;
   const hasSteps = !!(workshop?.steps && workshop.steps.trim());
