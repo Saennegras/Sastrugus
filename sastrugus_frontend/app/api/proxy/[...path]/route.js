@@ -4,11 +4,12 @@ import { cookies } from 'next/headers';
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 async function proxyRequest(request, params) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const token = cookieStore.get('jwt')?.value;
 
-  // Build the target URL
-  const pathSegments = params.path || [];
+  // Build the target URL - params needs to be awaited in Next.js 14+
+  const resolvedParams = await params;
+  const pathSegments = resolvedParams.path || [];
   const targetPath = pathSegments.join('/');
   const url = new URL(request.url);
   const queryString = url.search;
