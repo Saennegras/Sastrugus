@@ -1,62 +1,83 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuth } from '/context/AuthContext';
-import {getLastPartofSlug} from '../../utils/getLastPartOfSlug';
-import Title from "../../../_components/title";
-import Description from "../../../_components/description";
+import { useAuth } from "/context/AuthContext";
+import { getLastPartofSlug } from "../../utils/getLastPartOfSlug";
 import MaterialRequirement from "../../../_components/materialRequirement";
 import Steps from "../../../_components/steps";
 import Video from "@/app/_components/video";
+import PageHeader from "@/app/_components/PageHeader";
+import PremiumLockNotice from "@/app/workshop/components/PremiumLockNotice";
 
 export default function Page({ params }) {
-    const { user } = useAuth();
-    const [workshops, setWorkshops] = useState([]);
-    const [meta, setMeta] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const [workshop, setWorkshop] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    const slug = params.slug;
-    const documentId = getLastPartofSlug(slug);
+  const slug = params.slug;
+  const documentId = getLastPartofSlug(slug);
 
-    useEffect(() => {
-        try {
-            fetch(`/api/proxy/workshops/${slug}?populate=*`)
-                .then((res) => res.json())
-                .then((data) => {
-                    setWorkshops(data.data);
-                    setMeta(data.meta);
-                    setLoading(false);
-                    console.log(data.data)
-                })
-        } catch (err) {
-            console.error("Error loading workshop category content:", err);
-        }
-    }, []);
+  useEffect(() => {
+    try {
+      fetch(`/api/proxy/workshops/${slug}?populate=*`)
+        .then((res) => res.json())
+        .then((data) => {
+          setWorkshop(data?.data || {});
+        })
+        .catch((err) => {
+          console.error("Error loading workshop content:", err);
+        })
+        .finally(() => setLoading(false));
+    } catch (err) {
+      console.error("Error loading workshop content:", err);
+      setLoading(false);
+    }
+  }, [slug]);
 
-    if (loading) return <p>Betöltés...</p>;
+  const isPremium = !!workshop?.isPremium;
+  const hasSteps = !!(workshop?.steps && workshop.steps.trim());
+  const hasVideo = !!(workshop?.video && workshop.video.trim());
+  const hasMaterials = !!(workshop?.materialRequirement && workshop.materialRequirement.trim());
+  const hasContent = hasSteps || hasVideo || hasMaterials;
+  const isPremiumLocked = isPremium && !hasContent;
 
-    const isPremiumLocked = !user && workshops.isPremium;
+  if (loading) return <p>Betöltés...</p>;
 
-    return (
-        <main>
-            <Title title={workshops.title} />
-            <Description description={workshops.description} />
-            <MaterialRequirement materialRequirement={workshops.materialRequirement} />
+  return (
+      <div className="min-h-screen bg-canvas-50">
+      <PageHeader
+        title={workshop?.title || "Ismeretlen blueprint"}
+        subtitle={workshop?.description || "Nincs leírás"}
+      >
+        {isPremium && (
+          <span className="px-3 py-1 rounded-full bg-pastel-mint text-pastel-mintText text-xs font-semibold">
+            Prémium
+          </span>
+        )}
+      </PageHeader>
 
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="lg:col-span-8 space-y-6">
             {isPremiumLocked ? (
-                <div style={{
-                    padding: "20px",
-                    background: "#f5f5f5",
-                    borderRadius: "8px",
-                    marginTop: "20px"
-                }}>
-                    <h3>Ez egy prémium workshop</h3>
-                    <p>Jelentkezz be a megtekintéshez vagy vásárold meg a hozzáférést.</p>
-                </div>
+              <PremiumLockNotice isAuthenticated={!!user} workshopId={workshop?.documentId} />
             ) : (
-                <Steps steps={workshops.steps} />
+              <>
+                {hasSteps && <Steps steps={workshop.steps} />}
+                {hasVideo && <Video video={workshop.video} />}
+              </>
             )}
-            <Video video={workshops.video}/>
-        </main>
-    );
+          </div>
+
+          <div className="lg:col-span-4">
+            {hasMaterials ? (
+              <div className="sticky top-24">
+                <MaterialRequirement materialRequirement={workshop.materialRequirement} />
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

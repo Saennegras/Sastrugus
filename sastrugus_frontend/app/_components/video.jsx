@@ -13,12 +13,12 @@ const Video = ({ video, reversed = false }) => {
   const embedUrl = getYouTubeEmbedUrl(video);
 
   return (
-    <div className={`flex flex-col lg:flex-row items-center my-4 ${reversedClass}`}>
-      <div className="w-full lg:w-1/2 p-2">
+    <div className={`flex flex-col items-center my-6 ${reversedClass}`}>
+      <div className="w-full max-w-4xl mx-auto p-2">
         {embedUrl ? (
-          <div className="relative aspect-video w-full">
+          <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-soft">
             <iframe
-              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+              className="absolute top-0 left-0 w-full h-full"
               src={embedUrl}
               title="YouTube video"
               frameBorder="0"
@@ -27,7 +27,7 @@ const Video = ({ video, reversed = false }) => {
             ></iframe>
           </div>
         ) : (
-          <div className="flex items-center justify-center w-full h-64 bg-gray-200 rounded-lg shadow-lg">
+          <div className="flex items-center justify-center w-full h-72 bg-gray-200 rounded-2xl shadow-soft">
             <p className="text-gray-500">Nincs elérhető videó</p>
           </div>
         )}
